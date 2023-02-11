@@ -1,0 +1,12 @@
+{
+    "ares-1": {
+        "rpc_url": "https://ares-rpc.reece.sh",        
+        "prefix": "juno",
+        "faucet_mnemonic": "decorate bus bright decorate gallery bus bus decorate bus way bus decorate",
+        "denom": "ujunox",
+        "amount_to_send": 10000000,
+        "gas_price": "0.025",
+        "gas_amount": 200000,
+        "cooldown_seconds": 21600
+    }
+}

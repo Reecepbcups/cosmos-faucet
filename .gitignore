@@ -1,0 +1,4 @@
+.env
+chains.json
+node_modules/
+.vscode/
