@@ -102,6 +102,14 @@ app.get('/:chain_id', async (req, res) => {
 app.get('/:chain_id/:address', async (req, res) => {
     const { chain_id, address } = req.params;
 
+    // ensure address is only alphanumeric
+    if (!address.match(/^[a-zA-Z0-9]+$/)) {
+        res.status(400).json({
+            error: 'Address is not valid'
+        })
+        return;
+    }
+
     let chain = get_chain(chain_id);
     if (!chain || chain.error) {
         res.status(400).json(chain);
