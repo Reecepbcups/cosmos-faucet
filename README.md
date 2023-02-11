@@ -29,8 +29,12 @@ cp .env.example .env
 cp chains.json.example chains.json
 # add chains / mnemonics you want to use. On start, you can view addresses via http://ip:port/<chain_id>
 
-npm install
-
+# local
 npm run start
 
+# prod
+npm i pm2 --global
+pm2 start src/index.ts --name faucet --watch --interpreter ./node_modules/.bin/ts-node
+# pm2 logs
+# pm2 stop faucet
 ```
