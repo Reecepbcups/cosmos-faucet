@@ -7,7 +7,7 @@ Get funds through a browser GET request or cURL, making it easy for users withou
 ## Usage
 
 ```bash
-# NODE: add chain ids in the chains.json file (can run multiple faucets on 1 instance)
+# NOTE: add chain ids in the chains.json file (can run multiple faucets on 1 instance)
 
 # Show which chains and endpoints there are
 GET https://ip:port/
