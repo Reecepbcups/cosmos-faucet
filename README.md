@@ -1,11 +1,25 @@
 # Cosmos Faucet
 
-GET some funds via a GET request :D
+Get funds through a browser GET request or cURL, making it easy for users without needing a discord bot. Configuration files allow adding multiple chain and mnemonic options for various network faucets.
+
+## Usage
+
+```bash
+# NODE: add chain ids in the chains.json file (can run multiple faucets on 1 instance)
+
+# Show which chains and endpoints there are
+GET https://ip:port/
+
+# Get information about the faucet for a given chain
+GET https://ip:port/<chain_id>
+
+# Send funds to an address on the given chain
+GET https://ip:port/<chain_id>/<address>
+```
 
 ## Install
 
 ```bash
-
 sudo apt update
 
 # install nodejs
@@ -23,10 +37,10 @@ sudo apt remove nodejs npm node nodejs-doc
 ```
 
 ```bash
-cp .env.example .env
+cp configs/.env.example .env
 # edit the port you want it to run on
 
-cp chains.json.example chains.json
+cp configs/chains.json.example chains.json
 # add chains / mnemonics you want to use. On start, you can view addresses via http://ip:port/<chain_id>
 
 # local
