@@ -2,6 +2,8 @@
 
 Get funds through a browser GET request or cURL, making it easy for users without needing a discord bot. Configuration files allow adding multiple chain and mnemonic options for various network faucets.
 
+![image](https://user-images.githubusercontent.com/31943163/218350384-78cdf707-f3e7-425a-8d71-900dd5d6c9e3.png)
+
 ## Usage
 
 ```bash
