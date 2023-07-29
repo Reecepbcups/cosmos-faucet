@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A REST API for GETting tokens",
   "main": "src/index.ts",
-  "scripts": {    
+  "scripts": {
     "start": "ts-node src/index.ts",
-    "prod": "ts-node --transpile-only src/index.ts"
+    "prod": "nodemon --transpile-only src/index.ts"
   },
   "author": "Reece Williams (@Reecepbcups_)",
   "license": "ISC",
@@ -15,13 +15,14 @@
     "cors": "^2.8.5",
     "cosmwasm": "1.1.1",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
     "@types/expect": "^24.3.0",
-    "@types/node": "^16.11.1",    
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.1",
     "ts-node": "^10.3.0",
     "tslib": "^2.3.1",
     "typescript": "^4.8.2"

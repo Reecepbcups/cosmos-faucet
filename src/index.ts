@@ -3,7 +3,7 @@ import { CosmWasmClient, SigningCosmWasmClient, GasPrice, coin, calculateFee } f
 // import stargate client from stargate
 import { SigningStargateClient } from "@cosmjs/stargate";
 
-import { getAccountFromMnemonic, sendTokensToAccount } from "./helpers"
+import { getAccountFromMnemonic } from "./helpers"
 
 import express from 'express';
 import cors from 'cors';
