@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "prod": "nodemon --transpile-only src/index.ts"
+    "prod": "nodemon --exitcrash --transpile-only src/index.ts"
   },
   "author": "Reece Williams (@Reecepbcups_)",
   "license": "ISC",
