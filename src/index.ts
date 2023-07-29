@@ -1,5 +1,8 @@
 import { CosmWasmClient, SigningCosmWasmClient, GasPrice, coin, calculateFee } from "cosmwasm";
 
+// import stargate client from stargate
+import { SigningStargateClient } from "@cosmjs/stargate";
+
 import { getAccountFromMnemonic, sendTokensToAccount } from "./helpers"
 
 import express from 'express';
@@ -103,12 +106,14 @@ app.get('/:chain_id/:address', async (req, res) => {
     const { chain_id, address } = req.params;
 
     // ensure address is only alphanumeric
-    if (!address.match(/^[a-zA-Z0-9]+$/)) {
-        res.status(400).json({
-            error: 'Address is not valid'
-        })
-        return;
-    }
+    // if (!address.match(/^[a-zA-Z0-9]+$/)) {
+    //     res.status(400).json({
+    //         error: 'Address is not valid'
+    //     })
+    //     return;
+    // }
+
+
 
     let chain = get_chain(chain_id);
     if (!chain || chain.error) {
@@ -137,28 +142,26 @@ app.get('/:chain_id/:address', async (req, res) => {
         }
     }
 
+    const payment_account = await getAccountFromMnemonic(chain.faucet_mnemonic, chain.prefix); 
+    if (address === payment_account.account.address) {
+        res.status(400).json({
+            error: 'Address is the same as the faucet address'
+        })
+        return;
+    }
+
+    const config = {
+        chainId: chain_id,
+        rpcEndpoint: chain.rpc_url,
+        prefix: chain.prefix,
+    }
+    const fee = calculateFee(chain.gas_amount, GasPrice.fromString(`${chain.gas_price}${chain.denom}`));
+
     try {
-        const payment_account = await getAccountFromMnemonic(chain.faucet_mnemonic, chain.prefix);
-        
-        if (address === payment_account.account.address) {
-            res.status(400).json({
-                error: 'Address is the same as the faucet address'
-            })
-            return;
-        }
-    
-        const config = {
-            chainId: chain_id,
-            rpcEndpoint: chain.rpc_url,
-            prefix: chain.prefix,
-        }
-        const fee = calculateFee(chain.gas_amount, GasPrice.fromString(`${chain.gas_price}${chain.denom}`));
-    
-        const client = await SigningCosmWasmClient.connectWithSigner(config.rpcEndpoint, payment_account.wallet, config);
-    
+        const client = await SigningStargateClient.connectWithSigner(config.rpcEndpoint, payment_account.wallet);
         const amt = coin(chain.amount_to_send, chain.denom);
-        let result = await sendTokensToAccount(client, payment_account, address, config.rpcEndpoint, [amt], fee);
-            
+
+        let result = await client.sendTokens(payment_account.account.address, address, [amt], fee);
         if (result.code === 0) {
             cooldown_map.set(map_key, Date.now() + chain.cooldown_seconds * 1000);
         }

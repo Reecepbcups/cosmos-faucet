@@ -18,9 +18,3 @@ export const getRandomAccount = async (prefix: string = "cosmos") => {
         account: account
     }
 };
-
-
-export const sendTokensToAccount = async (client: any, data: any, to_address: string, rpc: string, coins: [Coin], fee: any) => {
-    const result = await client.sendTokens(data.account.address, to_address, coins, fee);
-    return result;
-}
