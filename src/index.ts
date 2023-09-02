@@ -173,6 +173,7 @@ app.get('/:chain_id/:address', async (req, res) => {
         })
 
     } catch (error: any) {
+        console.log(error.message)
         res.json({
             error: error.message
         })
